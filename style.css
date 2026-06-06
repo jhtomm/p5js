@@ -1,3 +1,8 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. 글로벌 초기화 및 폰트 세팅
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -5,108 +10,149 @@
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
+/* 갤러리 무드의 순수 딥 블랙 배경 */
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 60px 24px;
+  padding: 80px 24px;
   background: #000000; 
   color: #ffffff;
+  overflow-x: hidden;
 }
 
+/* ==========================================================================
+   2. 전시장 타이틀 디자인 (세련된 자간 배열)
+   ========================================================================== */
 h1 {
-  margin-bottom: 8px;
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+  font-size: 2.4rem;
+  font-weight: 200; /* 고급스러운 미니멀 서체 느낌 연출 */
+  letter-spacing: 0.2em; /* 자간을 넓혀 공간감을 부여 */
   text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .subtitle {
   font-size: 0.85rem;
-  color: #555555;
-  margin-bottom: 60px;
-  letter-spacing: 0.05em;
+  color: #4a4a4e; /* 은은하게 묻히는 다크 그레이 */
+  margin-bottom: 70px;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
 
+/* 전시 벽면 그리드 레이아웃 */
 #projects {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
-  max-width: 960px;
-  gap: 50px;
+  max-width: 1000px; /* 액자가 웅장하게 보이도록 소폭 확장 */
+  gap: 60px; /* 액자 간 호흡할 수 있는 여유로운 여백 수치 */
 }
 
-#projects .classic-frame {
+/* ==========================================================================
+   3. [핵심 심미성] 대형 앤틱 갤러리 액자 (Classic Museum Frame)
+   ========================================================================== */
+#projects .frame {
   position: relative;
-  background: #474a4f; 
-  border: 18px solid #3a3226; 
-  border-image: linear-gradient(to bottom right, #6b5b43, #2b241b, #4a3e2e, #1a1510) 1;
-  padding: 24px 24px 50px 24px; 
-  outline: 2px solid #846f4e; 
-  outline-offset: -10px;
+  background: #424549; /* 이미지 속 매트(보드지) 영역의 고급스러운 매트 그레이 */
+  
+  /* 다중 그라데이션 보더를 활용해 조명을 받는 입체 앤틱 원목/청동 프레임 모사 */
+  border: 20px solid #362e24;
+  border-image: linear-gradient(to bottom right, #6e5d46 0%, #292119 40%, #4f4231 70%, #17130e 100%) 1;
+  
+  /* [중요 디테일] 이미지 안쪽에 선명하게 박혀있는 얇은 내측 골드 프레임 라인 구현 */
+  padding: 26px 26px 65px 26px; /* 하단 네임택 자리를 위해 아래 여백을 더 깊게 배분 */
+  outline: 2px solid #8e7a56; 
+  outline-offset: -12px; 
+
+  /* 은은하면서 묵직하게 벽면으로 떨어지는 하단 스포트라이트 그림자 효과 */
   box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.85),
-    inset 0 0 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    0 35px 70px rgba(0, 0, 0, 0.9),
+    0 10px 20px rgba(0, 0, 0, 0.7),
+    inset 0 0 24px rgba(0, 0, 0, 0.5);
+    
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
 }
 
-#projects .classic-frame:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95);
+/* 마우스 호버 인터랙션: 작품 앞으로 한 걸음 다가가는 듯한 입체 효과 */
+#projects .frame:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 
+    0 50px 90px rgba(0, 0, 0, 0.95),
+    0 15px 30px rgba(0, 0, 0, 0.8);
 }
 
-.inner-window {
+/* ==========================================================================
+   4. 액자 내부 캔버스 창틀 및 p5.js 정렬 보정 (CORS 및 검은 화면 해결)
+   ========================================================================== */
+.canvas-container {
   aspect-ratio: 16 / 9;
   position: relative;
   overflow: hidden;
-  background: #000;
-  border: 3px solid #1a1a1a;
+  background: #000000;
+  border: 4px solid #1c1c1e; /* 매트 보드지와 캔버스 경계층 단차 틀 */
+  
+  /* 작품이 액자 안쪽으로 쑥 파여 들어간 정밀 음영(Inset Shadow) */
   box-shadow: 
-    inset 0 8px 12px rgba(0, 0, 0, 0.85),
-    0 1px 2px rgba(255, 255, 255, 0.1); 
+    inset 0 10px 16px rgba(0, 0, 0, 0.95),
+    inset 0 -2px 6px rgba(255, 255, 255, 0.05);
 }
 
-/* 💡 화면이 검은색으로만 나올 때 수정해보는 1순위 타겟 영역 */
-#projects .inner-window iframe {
+/* 💡 p5.js 스케치가 구석으로 밀려 검은 화면만 뜨는 버그 방지 코드 */
+#projects .canvas-container iframe {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
   height: 100%;
   border: none;
-  transform: translate(-50%, -50%); /* iframe 내부 스케치를 액자 정중앙에 강제 정렬 */
+  transform: translate(-50%, -50%); /* 브라우저 뷰포트 크기에 무관하게 액자 정중앙 고정 */
 }
 
-.gold-plate {
+/* ==========================================================================
+   5. [하이라이트] 이미지 속 하단 황동 메탈 네임플레이트 명패 디자인
+   ========================================================================== */
+.frame-caption {
   position: absolute;
-  bottom: 12px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
-  padding: 4px 8px;
-  background: linear-gradient(135deg, #a38f65 0%, #c5b48d 50%, #846f4e 100%);
-  border: 1px solid #635235;
-  border-radius: 3px;
+  width: 180px;
+  padding: 6px 10px;
+  
+  /* 실제 황동판의 은은한 메탈 반사광 그라데이션 */
+  background: linear-gradient(135deg, #a8946b 0%, #eddcb4 30%, #b8a276 60%, #806b43 100%);
+  border: 1px solid #594a2e;
+  border-radius: 2px;
   text-align: center;
+  
+  /* 명패 자체가 튀어나온 듯한 미세 입체 그림자 */
   box-shadow: 
-    0 2px 4px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.2);
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
-.gold-plate .title {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #261f12;
-  text-transform: uppercase;
+/* 기존 h2, p 태그 구조를 명패 각인 폰트로 재가공 */
+.frame-caption h2 {
+  font-size: 0.68rem;
+  font-weight: 800;
   letter-spacing: 0.05em;
-  line-height: 1.2;
+  text-transform: uppercase;
+  color: #1a140a; /* 메탈판에 레이저 각인된 듯한 진한 브라운 블랙 */
+  margin-bottom: 2px;
+  border: none;
+  padding: 0;
 }
 
-.gold-plate .meta {
+.frame-caption p {
   font-size: 0.55rem;
-  font-weight: 500;
-  color: #3d321d;
-  margin-top: 1px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #3d321b; /* 조금 더 연한 각인 톤 */
+  margin: 0;
+  padding: 0;
 }
