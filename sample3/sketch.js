@@ -4,7 +4,6 @@ let clothR = 45, clothG = 40, clothB = 40;
 
 function setup() {
   createCanvas(600, 400);
-  saveGif('caricature', 5);
 }
 
 function draw() {
