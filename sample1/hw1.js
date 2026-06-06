@@ -50,8 +50,3 @@ function draw() {
   point(280, 100);
   point(320, 300);
 }
-
-// 창 크기가 바뀔 때 캔버스 크기도 재조정
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
