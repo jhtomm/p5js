@@ -51,7 +51,7 @@
       gap: 48px; /* 액자와 액자 사이 거리를 넓혀 쾌적하게 배치 */
     }
 
-    /* 4. [핵심] 미술관 갤러리 액자(Frame) 디자인 */
+    /* 4. 미술관 갤러리 액자(Frame) 디자인 */
     #projects .frame {
       background: #18181b; /* 액자 내부 매트(Matte) 보드 색상 */
       border: 14px solid #27272a; /* 1) 두꺼운 프레임 테두리 */
@@ -75,4 +75,97 @@
         0 0 20px rgba(99, 102, 241, 0.15); /* 은은한 후광 */
     }
 
-    /* 5. [수정됨] 액자 속 캔버스 영역을
+    /* 5. [수정] 캔버스 컨테이너 크기를 가로 396px, 세로 264px (3:2 비율)로 완전히 고정 */
+    .canvas-container {
+      width: 396px;
+      height: 264px;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.9);
+      border: 1px solid #09090b;
+      margin: 0 auto; /* 액자 내부에서 가운데 정렬 */
+    }
+
+    /* [수정] 원래 크기인 600x400을 정확히 0.66배 축소하여 396x264 캔버스에 박아넣음 */
+    #projects .canvas-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 400px;
+      border: none;
+      transform-origin: top left;
+      transform: scale(0.66); /* 600px * 0.66 = 396px (오차 없이 딱 맞춤) */
+    }
+
+    /* 6. 미술관 작품 네임택 (캡션) 스타일 */
+    .frame-caption {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px dashed #2f2f35; /* 작품과 설명 구분선 */
+      text-align: center; /* 실제 미술관 명패처럼 중앙 정렬 */
+    }
+
+    .frame-caption h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: #f4f4f5;
+      margin-bottom: 4px;
+    }
+
+    .frame-caption p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: #71717a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>P5.js Exhibition</h1>
+  <p class="subtitle">Interactive Digital Art Gallery</p>
+  
+  <main id="projects">
+
+    <div class="frame">
+      <div class="canvas-container">
+        <iframe src="sample1/index.html"></iframe>
+      </div>
+      <div class="frame-caption">
+        <h2>Abstract art</h2>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="canvas-container">
+        <iframe src="sample4/index.html"></iframe>
+      </div>
+      <div class="frame-caption">
+        <h2>Moving Abstract art</h2>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="canvas-container">
+        <iframe src="sample2/index.html"></iframe>
+      </div>
+      <div class="frame-caption">
+        <h2>Caricature</h2>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="canvas-container">
+        <iframe src="sample3/index.html"></iframe>
+      </div>
+      <div class="frame-caption">
+        <h2>Moving Caricature</h2>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
