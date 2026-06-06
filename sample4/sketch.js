@@ -16,7 +16,6 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   circleColor = color(0, 70, 100, 60);
   circleColorTarget = color(0, 70, 100, 60);
-  saveGif('abstract_animation', 5);
 }
 
 function draw() {
