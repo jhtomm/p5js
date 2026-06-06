@@ -1,31 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p5.js 작품 모음</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>p5.js 작품 모음</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+
+    #projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 600px;
+      gap: 12px;
+    }
+
+    #projects .cell {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    #projects .cell iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 400px;
+      border: none;
+      transform-origin: top left;
+      transform: scale(0.5);
+    }
+
+  </style>
 </head>
 <body>
-    <header>
-        <h1>나의 p5.js 작품</h1>
-        <p>아래 링크를 클릭하여 다양한 p5.js 프로그램을 감상하세요.</p>
-    </header>
 
-    <section id="projects">
+  <h1>나의 p5.js 작품</h1>
 
-        <div class="project">
-            <a href="sample1/index.html">
-                프로젝트 1: 이 프로그램은 마우스를 따라 움직이는 원을 그립니다.
-            </a>
-        </div>
+  <main id="projects">
 
-        <div class="project">
-            <a href="sample2/index.html">
-                프로젝트 2: 이 프로그램은 다양한 색상으로 변화하는 배경을 만듭니다.
-            </a>
-        </div>
+    <div class="cell">
+      <iframe src="sample1/index.html"></iframe>
+    </div>
 
-    </section>
+    <div class="cell">
+      <iframe src="sample4/index.html"></iframe>
+    </div>
+
+    <div class="cell">
+      <iframe src="sample2/index.html"></iframe>
+    </div>
+
+    <div class="cell">
+      <iframe src="sample3/index.html"></iframe>
+    </div>
+
+  </main>
+
 </body>
 </html>
