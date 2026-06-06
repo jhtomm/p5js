@@ -4,72 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>p5.js 가상 미술관</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    }
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-    /* 1. 배경은 요청대로 깔끔한 검은색 유지 */
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 60px 24px;
-      background: #000000; 
-      color: #ffffff;
-    }
+  <h1>Digital Art Vault</h1>
+  <p class="subtitle">Classic Gallery Framework for p5.js Sketch</p>
 
-    h1 {
-      margin-bottom: 8px;
-      font-size: 2rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+  <main id="projects">
 
-    .subtitle {
-      font-size: 0.85rem;
-      color: #555555;
-      margin-bottom: 60px;
-      letter-spacing: 0.05em;
-    }
+    <div class="classic-frame">
+      <div class="inner-window">
+        <iframe src="sample1/index.html"></iframe>
+      </div>
+      <div class="gold-plate">
+        <div class="title">Artwork 01</div>
+        <div class="meta">p5.js | 2026</div>
+      </div>
+    </div>
 
-    /* 전시 그리드 */
-    #projects {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      width: 100%;
-      max-width: 960px;
-      gap: 50px;
-    }
+    <div class="classic-frame">
+      <div class="inner-window">
+        <iframe src="sample4/index.html"></iframe>
+      </div>
+      <div class="gold-plate">
+        <div class="title">Artwork 02</div>
+        <div class="meta">p5.js | 2026</div>
+      </div>
+    </div>
 
-    /* 2. [핵심] 이미지 속 앤틱 액자(Frame) 마스터 스타일 */
-    #projects .classic-frame {
-      position: relative;
-      background: #474a4f; /* 이미지 특유의 매트(Matte) 영역 웜그레이 색상 */
-      
-      /* 다중 보더와 입체적 그라데이션으로 앤틱 골드/청동 프레임 질감 구현 */
-      border: 18px solid #3a3226; 
-      border-image: linear-gradient(to bottom right, #6b5b43, #2b241b, #4a3e2e, #1a1510) 1;
-      
-      /* 내부 골드 가이드라인을 표현하기 위한 패딩 및 아웃라인 */
-      padding: 24px 24px 50px 24px; /* 명패 자리를 위해 아래쪽 패딩을 더 넓게 */
-      outline: 2px solid #846f4e; /* 프레임 바로 안쪽의 얇은 금색 선 */
-      outline-offset: -10px;
+    <div class="classic-frame">
+      <div class="inner-window">
+        <iframe src="sample2/index.html"></iframe>
+      </div>
+      <div class="gold-plate">
+        <div class="title">Artwork 03</div>
+        <div class="meta">p5.js | 2026</div>
+      </div>
+    </div>
 
-      /* 외곽 그림자 및 안쪽 음영을 겹쳐 입체감 극대화 */
-      box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.85),
-        inset 0 0 20px rgba(0, 0, 0, 0.4);
-      
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    }
+    <div class="classic-frame">
+      <div class="inner-window">
+        <iframe src="sample3/index.html"></iframe>
+      </div>
+      <div class="gold-plate">
+        <div class="title">Artwork 04</div>
+        <div class="meta">p5.js | 2026</div>
+      </div>
+    </div>
 
-    /* 마우스 호버 시 살짝 부각되는 효과 */
-    #projects .classic-frame:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow
+  </main>
+
+</body>
+</html>
